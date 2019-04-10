@@ -1,25 +1,33 @@
 window.addEventListener('DOMContentLoaded', function () {
-  
    let more = document.querySelectorAll('.row > div > div >button'),
-   overlay = document.querySelector('.popup_calc'),
-   
-   close = document.querySelector('.popup_calc_close');
-
+    overlay = document.querySelector('.popup_calc'),
+    btn = document.querySelector('.popup_engineer_btn'),
+    popupModal = document.querySelector('.popup_calc_content'),
+    close = document.querySelector('.popup_calc_close'),
+    modal = document.querySelector('.popup_engineer');
+//-----------------------------------------------------
    more.forEach((item) => {
 item.addEventListener('click', function () {
    overlay.style.display = 'block';
    document.body.style.overflow = 'hidden';
-
-   
+});
 });
 
-
-
+ function closeModal(trigger, selector) {
+   trigger.addEventListener('click', (event) => {
+     const target = event.target;
+     if (target.classList.contains(selector)) {
+       trigger.style.display = 'none';
+       document.body.style.overflow = '';
+     }
+   })
+ }
+ closeModal(close, 'popup_calc_close');
  
-   
+
    
  
-});
+
 //прописываем при наведении на иконки в модальном окне они увеличиваются
  
 
