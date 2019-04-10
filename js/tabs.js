@@ -1,12 +1,15 @@
-"use strict";
+window.addEventListener('DOMContentLoaded', function () {
 
+const popupModal = document.querySelector('.popup_calc_content');
 
- let wer = document.querySelector('.popup_engineer'),
-btn = document.querySelector('.popup_engineer'),
- close = document.querySelector();
-
- wer.addEventListener('click', function () {
-  overlay.style.display = 'block';
-  this.classList.add('more-splash');
-  document.body.style.overflow = 'hidden';
-});
+function closeModal(trigger, selector ) {
+    trigger.addEventListener('click', (event) => {
+        const target = event.target;
+        if (target.classList.contains(selector)) {
+                trigger.style.display = 'none';
+            }
+    })
+}
+console.log(popupModal);
+closeModal(popupModal, 'popup_calc_content');
+}); 
