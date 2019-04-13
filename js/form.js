@@ -1,7 +1,10 @@
 window.addEventListener('DOMContentLoaded', function () {
 
      //Form
+     //--------------------------------------------------------------------------
 
+
+     //---------------------------------------------------------------------
      let message = {
           loading: "Загрузка...",
           sucsess: "Спасибо! Скоро мы с Вами свяжемся!",
@@ -10,10 +13,12 @@ window.addEventListener('DOMContentLoaded', function () {
 
      let form = document.querySelectorAll('form'),
           statusMessage = document.createElement('div');
-     let input1 = document.querySelectorAll('.popup_calc_content > input');
-     console.log(input1);
+
+
      statusMessage.classList.add('status');
+
      form.forEach((item) => {
+
           item.addEventListener('submit', function (event) {
                event.preventDefault();
                let input = item.querySelectorAll('input');
@@ -23,7 +28,11 @@ window.addEventListener('DOMContentLoaded', function () {
                request.open('POST', 'server.php');
                request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
                let formData = new FormData(item);
+
+
                let obj = {};
+
+
 
 
                formData.forEach(function (value, key) {
@@ -48,5 +57,6 @@ window.addEventListener('DOMContentLoaded', function () {
 
           });
      });
+
 
 });

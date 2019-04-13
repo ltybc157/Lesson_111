@@ -6,15 +6,22 @@ window.addEventListener('DOMContentLoaded', function () {
     populCalcBtnProfile = document.querySelector('.popup_calc_button'),
     populCalcBtnEnd = document.querySelector('.popup_calc_profile_button'),
     popupEngineer = document.querySelector('.popup_engineer'),
+    phoneLink= document.querySelectorAll('.phone_link'),
+    
     РeaderBtn = document.querySelector('.header_btn');
     
  //-------------открытие 1 окна прописываем на 2 кнопки------------------------------
-  more.forEach((item) => {
+ function AddModal(a, b) {
+   a.forEach((item) => {
     item.addEventListener('click', function () {
-      overlay.style.display = 'flex';
+      b.style.display = 'flex';
       document.body.style.overflow = 'hidden';
     });
   });
+ } 
+ AddModal(more, overlay);
+ AddModal(phoneLink,  popupEngineer);
+ 
  //-------------открытие 2,3 окна прописываем на 2 далее------------------------------
   function addModal(trigger, add) {
     trigger.addEventListener('click', function () {
@@ -22,6 +29,7 @@ window.addEventListener('DOMContentLoaded', function () {
       document.body.style.overflow = 'hidden';
     });
   }
+  
   addModal(РeaderBtn, popupEngineer); // открытие header
   addModal(populCalcBtnProfile, popupCalcProfile); //открытие 2 окна
   addModal(populCalcBtnEnd, populCalcEnd); //открытие 3 окна
@@ -41,6 +49,7 @@ window.addEventListener('DOMContentLoaded', function () {
   closeModal(overlay, 'popup_calc', 'popup_calc_close'); //закрытие 1 окна
   closeModal(popupCalcProfile, 'popup_calc_profile', 'popup_calc_profile_close'); // закрытие 2 окна
   closeModal(populCalcEnd, 'popup_calc_end', 'popup_calc_end_close'); // закрытие 3 окна
+  closeModal(populCalcEnd, 'popup_engineer', 'popup_close'); // закрытие 3 окна
 
 
   //----------------прописываем при наведении на иконки в модальном окне они увеличиваются----------------------
