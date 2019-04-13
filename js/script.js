@@ -10,6 +10,19 @@ window.addEventListener('DOMContentLoaded', function () {
     
     РeaderBtn = document.querySelector('.header_btn');
     
+
+ 
+     let tiMes = setInterval(freme, 60000)
+     function freme() {
+      
+      popupEngineer.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    
+     }
+     
+
+  
+
  //-------------открытие 1 окна прописываем на 2 кнопки------------------------------
  function AddModal(a, b) {
    a.forEach((item) => {
