@@ -18,6 +18,8 @@ window.addEventListener('DOMContentLoaded', function () {
     
      }
  //-------------открытие 1 окна прописываем на 2 кнопки------------------------------
+
+ 
  function AddModal(a, b) {
    a.forEach((item) => {
     item.addEventListener('click', function () {

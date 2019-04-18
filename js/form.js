@@ -1,5 +1,11 @@
 window.addEventListener('DOMContentLoaded', function () {
 
+     let widthWindow = document.querySelector('#width'),
+     viewType = document.querySelector('#view_type'),
+     warm = document.querySelectorAll('.checkbox'),
+     cold = document.querySelectorAll('.checkbox'),
+     heightWindow = document.querySelector('#height');
+console.log(cold);
      
      let message = {
           loading: "Загрузка...",
@@ -26,8 +32,17 @@ window.addEventListener('DOMContentLoaded', function () {
                let formData = new FormData(item);
 
 
-               let obj = {};
+               let obj = {
+                    width :widthWindow.value,
+                    height: heightWindow.value,
+                    view: viewType.value,
+                    Warm: warm[1].value,
+                    Cold: cold[0].value
+               };
+//----------------------------------------------------------------------------------
 
+
+//--------------------------------------------------------------------------------
 
 
 
