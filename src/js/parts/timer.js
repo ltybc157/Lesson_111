@@ -1,14 +1,12 @@
-
-function times(){
-
+function times() {
   let deadline = '2019-4-21';
 
   function getTimeRemaining(endtime) {
     let t = Date.parse(endtime) - Date.parse(new Date()),
         seconds = Math.floor(t / 1000 % 60),
         minutes = Math.floor(t / 1000 / 60 % 60),
-        hours = Math.floor((t / (1000 *60*60))),
-        days = Math.floor((t / (1000 *60*60*24)));
+        hours = Math.floor(t / (1000 * 60 * 60)),
+        days = Math.floor(t / (1000 * 60 * 60 * 24));
     return {
       'total': t,
       'hours': hours,
@@ -25,8 +23,7 @@ function times(){
         seconds = timer.querySelector('#seconds'),
         days = timer.querySelector('#days'),
         timeInterval = setInterval(updateClock, 1000);
-       
-  
+
     function updateClock() {
       let t = getTimeRemaining(endtime);
 

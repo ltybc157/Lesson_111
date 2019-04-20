@@ -1,10 +1,10 @@
+  'use strict';
 
-
-import { polyfill } from 'es6-promise'; polyfill();
+//import { polyfill } from 'es6-promise'; polyfill();
 import 'nodelist-foreach-polyfill';
 require('es6-promise').polyfill();
 window.addEventListener('DOMContentLoaded', function() {
-    'use strict';
+  
 
 let form = require('./parts/form.js'),
 times = require('./parts/timer.js'),

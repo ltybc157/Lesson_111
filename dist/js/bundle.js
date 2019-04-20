@@ -1534,17 +1534,15 @@ module.exports = g;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var es6_promise__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! es6-promise */ "./node_modules/es6-promise/dist/es6-promise.js");
-/* harmony import */ var es6_promise__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(es6_promise__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var nodelist_foreach_polyfill__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! nodelist-foreach-polyfill */ "./node_modules/nodelist-foreach-polyfill/index.js");
-/* harmony import */ var nodelist_foreach_polyfill__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(nodelist_foreach_polyfill__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var nodelist_foreach_polyfill__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! nodelist-foreach-polyfill */ "./node_modules/nodelist-foreach-polyfill/index.js");
+/* harmony import */ var nodelist_foreach_polyfill__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(nodelist_foreach_polyfill__WEBPACK_IMPORTED_MODULE_0__);
+  
 
-
- Object(es6_promise__WEBPACK_IMPORTED_MODULE_0__["polyfill"])();
+//import { polyfill } from 'es6-promise'; polyfill();
 
 __webpack_require__(/*! es6-promise */ "./node_modules/es6-promise/dist/es6-promise.js").polyfill();
 window.addEventListener('DOMContentLoaded', function() {
-    'use strict';
+  
 
 let form = __webpack_require__(/*! ./parts/form.js */ "./src/js/parts/form.js"),
 times = __webpack_require__(/*! ./parts/timer.js */ "./src/js/parts/timer.js"),
@@ -1577,74 +1575,59 @@ if ('NodeList' in window && !NodeList.prototype.forEach) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
+function form() {
+  let widthWindow = document.querySelector('#width'),
+      viewType = document.querySelector('#view_type'),
+      warm = document.querySelectorAll('.checkbox'),
+      cold = document.querySelectorAll('.checkbox'),
+      heightWindow = document.querySelector('#height');
+  let message = {
+    loading: "Загрузка...",
+    sucsess: "Спасибо! Скоро мы с Вами свяжемся!",
+    failure: "Что-то пошло не так..."
+  };
+  let form = document.querySelectorAll('form'),
+      statusMessage = document.createElement('div');
+  statusMessage.classList.add('status');
+  form.forEach(item => {
+    item.addEventListener('submit', function (event) {
+      event.preventDefault();
+      let input = item.querySelectorAll('input');
+      item.appendChild(statusMessage);
+      let request = new XMLHttpRequest();
+      request.open('POST', 'server.php');
+      request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+      let formData = new FormData(item);
+      let obj = {
+        width: widthWindow.value,
+        height: heightWindow.value,
+        view: viewType.value,
+        Warm: warm[1].checked,
+        Cold: cold[0].checked
+      };
+      formData.forEach(function (value, key) {
+        obj[key] = value;
+      });
+      let json = JSON.stringify(obj);
+      request.send(json);
+      request.addEventListener('readystatechange', function () {
+        //прописываем чтобы наблюдать за изменением запроса
+        if (request.readyState < 4) {
+          statusMessage.innerHTML = message.loading;
+        } else if (request.readyState === 4 && request.status == 200) {
+          statusMessage.innerHTML = message.sucsess;
+        } else {
+          statusMessage.innerHTML = message.failure;
+        }
+      });
 
-function form()  {
-     
-     let widthWindow = document.querySelector('#width'),
-     viewType = document.querySelector('#view_type'),
-     warm = document.querySelectorAll('.checkbox'),
-     cold = document.querySelectorAll('.checkbox'),
-     heightWindow = document.querySelector('#height');
-     
-     let message = {
-          loading: "Загрузка...",
-          sucsess: "Спасибо! Скоро мы с Вами свяжемся!",
-          failure: "Что-то пошло не так..."
-     };
-
-     let form = document.querySelectorAll('form'),
-          statusMessage = document.createElement('div');
-
-
-     statusMessage.classList.add('status');
-
-     form.forEach((item) => {
-
-          item.addEventListener('submit', function (event) {
-               event.preventDefault();
-               let input = item.querySelectorAll('input');
-               item.appendChild(statusMessage);
-
-               let request = new XMLHttpRequest();
-               request.open('POST', 'server.php');
-               request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-               let formData = new FormData(item);
-
-
-               let obj = {
-                    width :widthWindow.value,
-                    height: heightWindow.value,
-                    view: viewType.value,
-                    Warm: warm[1].checked,
-                    Cold: cold[0].checked
-               };
-
-               formData.forEach(function (value, key) {
-                    obj[key] = value;
-               });
-
-               let json = JSON.stringify(obj);
-               request.send(json);
-
-               request.addEventListener('readystatechange', function () { //прописываем чтобы наблюдать за изменением запроса
-                    if (request.readyState < 4) {
-                         statusMessage.innerHTML = message.loading;
-                    } else if (request.readyState === 4 && request.status == 200) {
-                         statusMessage.innerHTML = message.sucsess;
-                    } else {
-                         statusMessage.innerHTML = message.failure;
-                    }
-               });
-               for (let i = 0; i < input.length; i++) {
-                    input[i].value = '';
-               }
-
-          });
-     });
-
-
-
+      for (let i = 0; i < input.length; i++) {
+        input[i].value = '';
+      }
+    });
+  });
 }
+
 module.exports = form;
 
 /***/ }),
@@ -1656,44 +1639,32 @@ module.exports = form;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-
-function pictire (){
-const works = document.querySelectorAll('.works .row div');
-
-works.forEach((work)=> {
-  work.addEventListener('click', (event) => {
-   event.preventDefault();
-  
-  const popupImage = document.createElement('div');
-  const curentImage = document.createElement('img');
-  const curentImageHref = work.querySelector('a').getAttribute('href');
-
-  popupImage.classList.add('popup');
-  curentImage.setAttribute('src', curentImageHref);
-  popupImage.appendChild(curentImage);
-  document.body.appendChild(popupImage);
-  popupImage.style.display = 'flex';
-  popupImage.style.alignItems = 'center';
-  popupImage.style.justifyContent = 'center';
-
-  popupImage.addEventListener('click', (event) => {
-     if (event.target.classList.contains('popup')) {
-       popupImage.style.display = 'none';
-       document.body.removeChild(popupImage);
-
-     }
-
-  })
+function pictire() {
+  const works = document.querySelectorAll('.works .row div');
+  works.forEach(work => {
+    work.addEventListener('click', event => {
+      event.preventDefault();
+      const popupImage = document.createElement('div');
+      const curentImage = document.createElement('img');
+      const curentImageHref = work.querySelector('a').getAttribute('href');
+      popupImage.classList.add('popup');
+      curentImage.setAttribute('src', curentImageHref);
+      popupImage.appendChild(curentImage);
+      document.body.appendChild(popupImage);
+      popupImage.style.display = 'flex';
+      popupImage.style.alignItems = 'center';
+      popupImage.style.justifyContent = 'center';
+      popupImage.addEventListener('click', event => {
+        if (event.target.classList.contains('popup')) {
+          popupImage.style.display = 'none';
+          document.body.removeChild(popupImage);
+        }
+      });
+    });
   });
-});
-
 }
+
 module.exports = pictire;
-
-
-
-
-
 
 /***/ }),
 
@@ -1704,72 +1675,75 @@ module.exports = pictire;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-function script () {
+function script() {
   'use strict';
-  let more = document.querySelectorAll('.row > div > div > button'), //вызываем 2 кнопки 
-    overlay = document.querySelector('.popup_calc'),
-    popupCalcProfile = document.querySelector('.popup_calc_profile'),
-    populCalcEnd = document.querySelector('.popup_calc_end'),
-    populCalcBtnProfile = document.querySelector('.popup_calc_button'),
-    populCalcBtnEnd = document.querySelector('.popup_calc_profile_button'),
-    popupEngineer = document.querySelector('.popup_engineer'),
-    phoneLink= document.querySelectorAll('.phone_link'),
-    
-    РeaderBtn = document.querySelector('.header_btn');
-    
-     let tiMes = setInterval(freme, 60000)
-     function freme() {
-      
-      popupEngineer.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-    
-     }
- //-------------открытие 1 окна прописываем на 2 кнопки------------------------------
 
- 
- function addModal(a, b) {
-   a.forEach((item) => {
-    item.addEventListener('click', function(event) {
-      event.preventDefault();
-      b.style.display = 'flex';
-     
-      document.body.style.overflow = 'hidden';
+  let more = document.querySelectorAll('.row > div > div > button'),
+      //вызываем 2 кнопки 
+  overlay = document.querySelector('.popup_calc'),
+      popupCalcProfile = document.querySelector('.popup_calc_profile'),
+      populCalcEnd = document.querySelector('.popup_calc_end'),
+      populCalcBtnProfile = document.querySelector('.popup_calc_button'),
+      populCalcBtnEnd = document.querySelector('.popup_calc_profile_button'),
+      popupEngineer = document.querySelector('.popup_engineer'),
+      phoneLink = document.querySelectorAll('.phone_link'),
+      РeaderBtn = document.querySelector('.header_btn');
+  let tiMes = setInterval(freme, 60000);
+
+  function freme() {
+    popupEngineer.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  } //-------------открытие 1 окна прописываем на 2 кнопки------------------------------
+
+
+  function addModal(a, b) {
+    a.forEach(item => {
+      item.addEventListener('click', function (event) {
+        event.preventDefault();
+        b.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      });
     });
-  });
- } 
- addModal(more, overlay);
- addModal(phoneLink,  popupEngineer);
- 
- //-------------открытие 2,3 окна прописываем на 2 далее------------------------------
+  }
+
+  addModal(more, overlay);
+  addModal(phoneLink, popupEngineer); //-------------открытие 2,3 окна прописываем на 2 далее------------------------------
+
   function addModalNow(trigger, add) {
-    trigger.addEventListener('click', function(event) {
+    trigger.addEventListener('click', function (event) {
       event.preventDefault();
       add.style.display = 'flex';
       document.body.style.overflow = 'hidden';
     });
   }
-  
+
   addModalNow(РeaderBtn, popupEngineer); // открытие header
+
   addModalNow(populCalcBtnProfile, popupCalcProfile); //открытие 2 окна
+
   addModalNow(populCalcBtnEnd, populCalcEnd); //открытие 3 окна
   //-------------закрытие 1,2,3  окно  прописываем на x и вне модального окна-----------
+
   function closeModal(trigger, selector, closeSelector) {
-    trigger.addEventListener('click', (event) => {
+    trigger.addEventListener('click', event => {
       const target = event.target;
-      if (target.classList.contains(closeSelector) ||
-        target.parentNode.classList.contains(closeSelector) ||
-        target.classList.contains(selector)) {
+
+      if (target.classList.contains(closeSelector) || target.parentNode.classList.contains(closeSelector) || target.classList.contains(selector)) {
         trigger.style.display = 'none';
         document.body.style.overflow = '';
       }
     });
   }
-  closeModal(popupEngineer, 'popup_engineer', 'popup_close'); //закрытие header
-  closeModal(overlay, 'popup_calc', 'popup_calc_close'); //закрытие 1 окна
-  closeModal(popupCalcProfile, 'popup_calc_profile', 'popup_calc_profile_close'); // закрытие 2 окна
-  closeModal(populCalcEnd, 'popup_calc_end', 'popup_calc_end_close'); // закрытие 3 окна
-  closeModal(populCalcEnd, 'popup_engineer', 'popup_close'); // закрытие 3 окна
 
+  closeModal(popupEngineer, 'popup_engineer', 'popup_close'); //закрытие header
+
+  closeModal(overlay, 'popup_calc', 'popup_calc_close'); //закрытие 1 окна
+
+  closeModal(popupCalcProfile, 'popup_calc_profile', 'popup_calc_profile_close'); // закрытие 2 окна
+
+  closeModal(populCalcEnd, 'popup_calc_end', 'popup_calc_end_close'); // закрытие 3 окна
+
+  closeModal(populCalcEnd, 'popup_engineer', 'popup_close'); // закрытие 3 окна
 }
 
 module.exports = script;
@@ -1785,54 +1759,54 @@ module.exports = script;
 
 function tabs() {
   'use strict';
-  const prewies = document.querySelectorAll('.balcon_icons > a > img'), //вызываеь все картинки маненькие из модального окна
-  bigImg = document.querySelectorAll('.big_img > img'), //вызываем все картинки большие из модального окна 
+
+  const prewies = document.querySelectorAll('.balcon_icons > a > img'),
+        //вызываеь все картинки маненькие из модального окна
+  bigImg = document.querySelectorAll('.big_img > img'),
+        //вызываем все картинки большие из модального окна 
   tab = document.querySelectorAll('.glazing_block'),
-  tabContent = document.querySelectorAll('.container > div.tree, div.aluminum,  div.plastic, div.french, div.rise'),
-  DecorationContent  = document.querySelectorAll('.decoration_content > div > div.internal, div.external, div.rising, div.roof'),
-  DecorationItem = document.querySelectorAll('.decoration_item'),
-  DecorationItemDiv = document.querySelectorAll('.decoration_item > div');
+        tabContent = document.querySelectorAll('.container > div.tree, div.aluminum,  div.plastic, div.french, div.rise'),
+        DecorationContent = document.querySelectorAll('.decoration_content > div > div.internal, div.external, div.rising, div.roof'),
+        DecorationItem = document.querySelectorAll('.decoration_item'),
+        DecorationItemDiv = document.querySelectorAll('.decoration_item > div');
 
   function tabs(a, b, c) {
-  a.forEach((item, i) => { // перебираем массив с картинками маленькими
-  item.addEventListener('click', (e) => {
-    e.preventDefault(); //прописываем чтобы убрать обычное поведени ,чтобы картинка не прыгала когда на неё наводишь мышкой
-  
-    a.forEach(img => { //прописываем чтобы  класс убрать у всех картинок 
-      img.classList.remove('do_image_more'); //  -//-
-    })
-   
-    item.classList.add('do_image_more'); //прописываем чтобы  класс добавить который увеличит картинки при наведении 
+    a.forEach((item, i) => {
+      // перебираем массив с картинками маленькими
+      item.addEventListener('click', e => {
+        e.preventDefault(); //прописываем чтобы убрать обычное поведени ,чтобы картинка не прыгала когда на неё наводишь мышкой
 
-    b.forEach(img => { //прописываем чтобы скрыть картинки большие
-      img.style.display = 'none';
+        a.forEach(img => {
+          //прописываем чтобы  класс убрать у всех картинок 
+          img.classList.remove('do_image_more'); //  -//-
+        });
+        item.classList.add('do_image_more'); //прописываем чтобы  класс добавить который увеличит картинки при наведении 
+
+        b.forEach(img => {
+          //прописываем чтобы скрыть картинки большие
+          img.style.display = 'none';
+        });
+        b[i].style.display = c;
+      });
     });
+  }
 
-    b[i].style.display = c;
+  tabs(tab, tabContent, 'block');
+  tabs(prewies, bigImg, 'inline-block');
+  tabs(DecorationItem, DecorationContent, 'inline-block'); //---------------------------------------------------------------------------------------------------------------------
 
+  DecorationItemDiv.forEach(item => {
+    item.addEventListener('click', e => {
+      e.preventDefault();
+      DecorationItemDiv.forEach(div => {
+        div.classList.remove('after_click');
+      });
+      item.classList.add('after_click');
+    });
   });
-});
- }
- tabs(tab, tabContent ,'block');
- tabs(prewies, bigImg ,'inline-block');
-tabs(DecorationItem, DecorationContent ,'inline-block');
-
-
- //---------------------------------------------------------------------------------------------------------------------
- DecorationItemDiv.forEach((item) => { 
-  item.addEventListener('click', (e) => {
-  e.preventDefault(); 
-  DecorationItemDiv.forEach(div => { 
-    div.classList.remove('after_click'); 
-    
-  })
-  item.classList.add('after_click'); 
-})
-})
- 
 }
-module.exports = tabs;
 
+module.exports = tabs;
 
 /***/ }),
 
@@ -1843,17 +1817,15 @@ module.exports = tabs;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-
-function times(){
-
+function times() {
   let deadline = '2019-4-21';
 
   function getTimeRemaining(endtime) {
     let t = Date.parse(endtime) - Date.parse(new Date()),
         seconds = Math.floor(t / 1000 % 60),
         minutes = Math.floor(t / 1000 / 60 % 60),
-        hours = Math.floor((t / (1000 *60*60))),
-        days = Math.floor((t / (1000 *60*60*24)));
+        hours = Math.floor(t / (1000 * 60 * 60)),
+        days = Math.floor(t / (1000 * 60 * 60 * 24));
     return {
       'total': t,
       'hours': hours,
@@ -1870,8 +1842,7 @@ function times(){
         seconds = timer.querySelector('#seconds'),
         days = timer.querySelector('#days'),
         timeInterval = setInterval(updateClock, 1000);
-       
-  
+
     function updateClock() {
       let t = getTimeRemaining(endtime);
 
