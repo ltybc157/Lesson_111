@@ -1,5 +1,5 @@
 function script () {
-  
+  'use strict';
   let more = document.querySelectorAll('.row > div > div > button'), //вызываем 2 кнопки 
     overlay = document.querySelector('.popup_calc'),
     popupCalcProfile = document.querySelector('.popup_calc_profile'),
@@ -21,28 +21,31 @@ function script () {
  //-------------открытие 1 окна прописываем на 2 кнопки------------------------------
 
  
- function AddModal(a, b) {
+ function addModal(a, b) {
    a.forEach((item) => {
-    item.addEventListener('click', function () {
+    item.addEventListener('click', function() {
+    
       b.style.display = 'flex';
+     
       document.body.style.overflow = 'hidden';
     });
   });
  } 
- AddModal(more, overlay);
- AddModal(phoneLink,  popupEngineer);
+ addModal(more, overlay);
+ addModal(phoneLink,  popupEngineer);
  
  //-------------открытие 2,3 окна прописываем на 2 далее------------------------------
-  function addModal(trigger, add) {
-    trigger.addEventListener('click', function () {
+  function addModalNow(trigger, add) {
+    trigger.addEventListener('click', function() {
+ 
       add.style.display = 'flex';
       document.body.style.overflow = 'hidden';
     });
   }
   
-  addModal(РeaderBtn, popupEngineer); // открытие header
-  addModal(populCalcBtnProfile, popupCalcProfile); //открытие 2 окна
-  addModal(populCalcBtnEnd, populCalcEnd); //открытие 3 окна
+  addModalNow(РeaderBtn, popupEngineer); // открытие header
+  addModalNow(populCalcBtnProfile, popupCalcProfile); //открытие 2 окна
+  addModalNow(populCalcBtnEnd, populCalcEnd); //открытие 3 окна
   //-------------закрытие 1,2,3  окно  прописываем на x и вне модального окна-----------
   function closeModal(trigger, selector, closeSelector) {
     trigger.addEventListener('click', (event) => {

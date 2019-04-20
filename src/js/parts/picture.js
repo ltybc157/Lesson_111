@@ -20,7 +20,7 @@ works.forEach((work)=> {
 
   popupImage.addEventListener('click', (event) => {
      if (event.target.classList.contains('popup')) {
-       popupImage.style.displey = 'none';
+       popupImage.style.display = 'none';
        document.body.removeChild(popupImage);
 
      }
