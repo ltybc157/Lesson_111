@@ -23,8 +23,8 @@ function script () {
  
  function addModal(a, b) {
    a.forEach((item) => {
-    item.addEventListener('click', function() {
-    
+    item.addEventListener('click', function(event) {
+      event.preventDefault();
       b.style.display = 'flex';
      
       document.body.style.overflow = 'hidden';
@@ -36,8 +36,8 @@ function script () {
  
  //-------------открытие 2,3 окна прописываем на 2 далее------------------------------
   function addModalNow(trigger, add) {
-    trigger.addEventListener('click', function() {
- 
+    trigger.addEventListener('click', function(event) {
+      event.preventDefault();
       add.style.display = 'flex';
       document.body.style.overflow = 'hidden';
     });

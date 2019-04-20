@@ -8,7 +8,7 @@ function tabs() {
   DecorationItem = document.querySelectorAll('.decoration_item'),
   DecorationItemDiv = document.querySelectorAll('.decoration_item > div');
 
-  function tabs(a, b) {
+  function tabs(a, b, c) {
   a.forEach((item, i) => { // перебираем массив с картинками маленькими
   item.addEventListener('click', (e) => {
     e.preventDefault(); //прописываем чтобы убрать обычное поведени ,чтобы картинка не прыгала когда на неё наводишь мышкой
@@ -22,16 +22,16 @@ function tabs() {
     b.forEach(img => { //прописываем чтобы скрыть картинки большие
       img.style.display = 'none';
     });
-    b[i].style.display = 'inline-block';
 
+    b[i].style.display = c;
 
   });
 });
  }
+ tabs(tab, tabContent ,'block');
+ tabs(prewies, bigImg ,'inline-block');
+tabs(DecorationItem, DecorationContent ,'inline-block');
 
- tabs(tab, tabContent);
- tabs(prewies, bigImg );
-tabs(DecorationItem, DecorationContent );
 
  //---------------------------------------------------------------------------------------------------------------------
  DecorationItemDiv.forEach((item) => { 
