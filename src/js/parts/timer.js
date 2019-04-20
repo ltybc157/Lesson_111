@@ -1,7 +1,6 @@
 
 function times(){
 
-
   let deadline = '2019-4-21';
 
   function getTimeRemaining(endtime) {

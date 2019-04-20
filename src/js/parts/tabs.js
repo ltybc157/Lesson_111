@@ -1,4 +1,5 @@
 function tabs() {
+
   const prewies = document.querySelectorAll('.balcon_icons > a > img'), //вызываеь все картинки маненькие из модального окна
   bigImg = document.querySelectorAll('.big_img > img'), //вызываем все картинки большие из модального окна 
   tab = document.querySelectorAll('.glazing_slider > div'),

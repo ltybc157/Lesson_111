@@ -1,6 +1,6 @@
 
 function form()  {
-
+     
      let widthWindow = document.querySelector('#width'),
      viewType = document.querySelector('#view_type'),
      warm = document.querySelectorAll('.checkbox'),

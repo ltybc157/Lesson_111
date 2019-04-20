@@ -125,7 +125,7 @@ pictire();
 
 
 function form()  {
-
+     
      let widthWindow = document.querySelector('#width'),
      viewType = document.querySelector('#view_type'),
      warm = document.querySelectorAll('.checkbox'),
@@ -251,10 +251,8 @@ module.exports = pictire;
 /***/ (function(module, exports) {
 
 function script () {
-
-
-window.addEventListener('DOMContentLoaded', function () {
-  let more = document.querySelectorAll('.row > div > div >button'), //вызываем 2 кнопки 
+  
+  let more = document.querySelectorAll('.row > div > div > button'), //вызываем 2 кнопки 
     overlay = document.querySelector('.popup_calc'),
     popupCalcProfile = document.querySelector('.popup_calc_profile'),
     populCalcEnd = document.querySelector('.popup_calc_end'),
@@ -314,7 +312,7 @@ window.addEventListener('DOMContentLoaded', function () {
   closeModal(popupCalcProfile, 'popup_calc_profile', 'popup_calc_profile_close'); // закрытие 2 окна
   closeModal(populCalcEnd, 'popup_calc_end', 'popup_calc_end_close'); // закрытие 3 окна
   closeModal(populCalcEnd, 'popup_engineer', 'popup_close'); // закрытие 3 окна
-});
+
 }
 
 module.exports = script;
@@ -329,6 +327,7 @@ module.exports = script;
 /***/ (function(module, exports) {
 
 function tabs() {
+
   const prewies = document.querySelectorAll('.balcon_icons > a > img'), //вызываеь все картинки маненькие из модального окна
   bigImg = document.querySelectorAll('.big_img > img'), //вызываем все картинки большие из модального окна 
   tab = document.querySelectorAll('.glazing_slider > div'),
@@ -376,6 +375,7 @@ tabs(DecorationItem, DecorationContent );
 }
 module.exports = tabs;
 
+
 /***/ }),
 
 /***/ "./src/js/parts/timer.js":
@@ -387,7 +387,6 @@ module.exports = tabs;
 
 
 function times(){
-
 
   let deadline = '2019-4-21';
 
