@@ -1,9 +1,6 @@
 
 function form()  {
 
-
-window.addEventListener('DOMContentLoaded', function () {
-
      let widthWindow = document.querySelector('#width'),
      viewType = document.querySelector('#view_type'),
      warm = document.querySelectorAll('.checkbox'),
@@ -67,6 +64,6 @@ window.addEventListener('DOMContentLoaded', function () {
      });
 
 
-});
+
 }
 module.exports = form;

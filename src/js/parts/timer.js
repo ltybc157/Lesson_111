@@ -1,8 +1,6 @@
 
-function times (){
+function times(){
 
-
-"use strict";
 
   let deadline = '2019-4-21';
 
