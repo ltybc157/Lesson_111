@@ -1,4 +1,4 @@
-
+function tabs() {
   const prewies = document.querySelectorAll('.balcon_icons > a > img'), //вызываеь все картинки маненькие из модального окна
   bigImg = document.querySelectorAll('.big_img > img'), //вызываем все картинки большие из модального окна 
   tab = document.querySelectorAll('.glazing_slider > div'),
@@ -6,7 +6,7 @@
   DecorationContent  = document.querySelectorAll('.decoration_content > div > div.internal, div.external, div.rising, div.roof'),
   DecorationItem = document.querySelectorAll('.decoration_item'),
   DecorationItemDiv = document.querySelectorAll('.decoration_item > div');
-console.log(DecorationItem);
+
   function tabs(a, b) {
   a.forEach((item, i) => { // перебираем массив с картинками маленькими
   item.addEventListener('click', (e) => {
@@ -20,7 +20,7 @@ console.log(DecorationItem);
     b.forEach(img => { //прописываем чтобы скрыть картинки большие
       img.style.display = 'none';
     });
-    b[i].style.display = 'inline-block';
+    b[i].style.display = 'block';
 
 
   });
@@ -43,34 +43,5 @@ tabs(DecorationItem, DecorationContent );
 })
 })
  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
+module.exports = tabs;

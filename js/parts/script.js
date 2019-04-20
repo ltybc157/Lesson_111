@@ -1,3 +1,6 @@
+function script () {
+
+
 window.addEventListener('DOMContentLoaded', function () {
   let more = document.querySelectorAll('.row > div > div >button'), //вызываем 2 кнопки 
     overlay = document.querySelector('.popup_calc'),
@@ -59,7 +62,7 @@ window.addEventListener('DOMContentLoaded', function () {
   closeModal(popupCalcProfile, 'popup_calc_profile', 'popup_calc_profile_close'); // закрытие 2 окна
   closeModal(populCalcEnd, 'popup_calc_end', 'popup_calc_end_close'); // закрытие 3 окна
   closeModal(populCalcEnd, 'popup_engineer', 'popup_close'); // закрытие 3 окна
-
-
-  
 });
+}
+
+module.exports = script;

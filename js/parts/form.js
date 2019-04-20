@@ -1,3 +1,7 @@
+
+function form()  {
+
+
 window.addEventListener('DOMContentLoaded', function () {
 
      let widthWindow = document.querySelector('#width'),
@@ -5,7 +9,6 @@ window.addEventListener('DOMContentLoaded', function () {
      warm = document.querySelectorAll('.checkbox'),
      cold = document.querySelectorAll('.checkbox'),
      heightWindow = document.querySelector('#height');
-console.log(cold);
      
      let message = {
           loading: "Загрузка...",
@@ -36,15 +39,9 @@ console.log(cold);
                     width :widthWindow.value,
                     height: heightWindow.value,
                     view: viewType.value,
-                    Warm: warm[1].value,
-                    Cold: cold[0].value
+                    Warm: warm[1].checked,
+                    Cold: cold[0].checked
                };
-//----------------------------------------------------------------------------------
-
-
-//--------------------------------------------------------------------------------
-
-
 
                formData.forEach(function (value, key) {
                     obj[key] = value;
@@ -71,3 +68,5 @@ console.log(cold);
 
 
 });
+}
+module.exports = form;

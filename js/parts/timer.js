@@ -1,5 +1,8 @@
-"use strict";
 
+function times (){
+
+
+"use strict";
 
   let deadline = '2019-4-21';
 
@@ -53,5 +56,6 @@
   }
 
   setClock('#timer', deadline);
+}
 
-
+module.exports = times;
